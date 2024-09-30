@@ -15,3 +15,5 @@ install:
 freeze:
 	pip freeze > requirements.txt
 
+server:
+	@python3 -m http.server -d ./docs/
