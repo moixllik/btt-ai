@@ -13,7 +13,7 @@ def home():
 
 
 def with_tts(filepath, text, lang):
-    print(f"\n\t{lang} | {filepath} |\n")
+    print(f"\n\t| {lang} | {filepath} |\n")
     tts = gTTS(text=text, lang=lang)
     if tts:
         tts.save(filepath)
@@ -26,7 +26,7 @@ def with_torch(filepath, text, height, width):
     pipe = AutoPipelineForText2Image.from_pretrained(model_id, dtype=torch.float16)
     height = int(int(height) / 4)
     width = int(int(width) / 4)
-    print(f"\n\t{height}x{width} | {filepath} |\n")
+    print(f"\n\t| {height}x{width} | {filepath} |\n")
     output = pipe(
         prompt=text,
         negative_prompt="low quality, bad quality",
