@@ -1,6 +1,6 @@
 schema_version = "1.0.0"
 
-id = "btt-ai"
+id = "btt_ai"
 version = "0.0.0"
 name = "BTT to AI"
 tagline = "AI generation with Strip Text"

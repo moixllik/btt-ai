@@ -25,7 +25,7 @@ def btt_from_text(types, strip):
             sound = sequences.new_sound(
                 name=name,
                 filepath=filepath,
-                channel=strip.channel + 2,
+                channel=strip.channel + 1,
                 frame_start=int(strip.frame_start)
             )
     elif types == 'image':

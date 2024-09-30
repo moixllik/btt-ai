@@ -1,12 +1,8 @@
 from flask import Flask, send_from_directory, request, send_file
 import tempfile
 from gtts import gTTS
-import os
-import dotenv
-import requests
-import json
-
-dotenv.load_dotenv()
+import torch
+from diffusers import AutoPipelineForText2Image
 
 app = Flask(__name__, static_folder="../docs")
 
@@ -17,20 +13,31 @@ def home():
 
 
 def with_tts(filepath, text, lang):
+    print(f"\n\t{lang} | {filepath} |\n")
     tts = gTTS(text=text, lang=lang)
-    tts.save(filepath)
-    return True
+    if tts:
+        tts.save(filepath)
+        return True
+    return False
 
 
-def with_api(filepath, text, height, width):
-    url = ""
-    api_key = os.getenv("OPENAI")
-    headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
-    data = {}
-    response = requests.post(url, headers=headers, json=data)
-    print(response, headers, data, response.json())
-    if response.status_code == 200:
-        print("ok")
+def with_torch(filepath, text, height, width):
+    model_id = "kandinsky-community/kandinsky-2-1"
+    pipe = AutoPipelineForText2Image.from_pretrained(model_id, dtype=torch.float16)
+    height = int(int(height) / 4)
+    width = int(int(width) / 4)
+    print(f"\n\t{height}x{width} | {filepath} |\n")
+    output = pipe(
+        prompt=text,
+        negative_prompt="low quality, bad quality",
+        prior_guidance_scale=1.0,
+        height=height,
+        width=width,
+    )
+    if len(output.images) == 1:
+        image = output.images[0]
+        image.save(filepath)
+        return True
     return False
 
 
@@ -39,21 +46,22 @@ def receive_data():
     data = request.get_json()
     with tempfile.NamedTemporaryFile() as temp_file:
         mimetype = ""
+        filepath = temp_file.name
         if data["type"] == "speech":
             mimetype = "audio/mpeg"
+            filepath += ".mp3"
             lang = request.args.get("lang", default="en")
-            if not with_tts(temp_file.name, data["text"], lang):
+            if not with_tts(filepath, data["text"], lang):
                 return "", 500
 
         elif data["type"] == "image":
             mimetype = "image/png"
-            if not with_api(
-                temp_file.name, data["text"], data["height"], data["width"]
-            ):
+            filepath += ".png"
+            if not with_torch(filepath, data["text"], data["height"], data["width"]):
                 return "", 500
 
         try:
-            return send_file(temp_file.name, mimetype=mimetype, as_attachment=True)
+            return send_file(filepath, mimetype=mimetype, as_attachment=True)
         except Exception as e:
             print(f"\nError:\n\t{e}")
             return "", 500

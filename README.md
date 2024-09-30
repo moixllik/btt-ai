@@ -2,6 +2,6 @@
 
 [Blender Video Text Tracks](https://github.com/moixllik/btt) to:
 
-* [ ] Speech
-* [ ] Image
+* [x] Speech
+* [x] Image
 
