@@ -1,0 +1,19 @@
+schema_version = "1.0.0"
+
+id = "btt-ai"
+version = "0.0.0"
+name = "BTT to AI"
+tagline = "AI generation with Strip Text"
+maintainer = "Irving Montalvo <@Moixllik>"
+website = "https://moixllik.github.io/btt-ai/"
+type = "add-on"
+tags = ["Sequencer"]
+blender_version_min = "4.2.0"
+license = ["SPDX:GPL-3.0-or-later"]
+
+[permissions]
+network = "Send text and receive media files"
+files = "Write media files to local"
+
+[build]
+paths_exclude_pattern = ["__pycache__/", "/.git/", "/*.zip"]
