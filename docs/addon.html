@@ -4,13 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Add-on | BTT AI</title>
+    <title>Add-on | BTT to AI</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <style>
+        i {
+            color: gray;
+        }
+        .button {
+            padding: 0.3em 1em;
+            background-color: var(--code);
+            color: var(--background);
+            border-radius: 5px;
+            font-weight: bold;
+            font-variant: small-caps;
+        }
+    </style>
 </head>
 
 <body>
     <main>
-        <h1><a href="https://moixllik.github.io/btt-ai/">BTT AI</a></h1>
+        <h1><a href="https://moixllik.github.io/btt-ai/">BTT to AI</a></h1>
         <nav>
             <a href="https://moixllik.github.io/btt-ai/">Home</a>
             | <a href="https://moixllik.github.io/btt-ai/addon">Add-on</a>
@@ -19,6 +32,19 @@
         </nav>
         <section>
             <h2>Add-on for Blender</h2>
+            <figure><img src="images/install.png" alt="install"></figure>
+            <p style="text-align: center;">
+                <a class="button" href="https://github.com/moixllik/btt-ai/releases/tag/latest">Download</a>
+            </p>
+
+            <h3>Scene / Custom Properties</h3>
+            <figure><img src="images/scene-ai.png" alt="scene ai"></figure>
+            <pre><code>Scene.ai_url= [default] http://localhost:8080
+Scene.ai_token= [default] None</code></pre>
+
+            <h3>Strip / Custom Properties</h3>
+            <pre><code>Strip.ai_query= [default] None <i># ?lang=en</i>
+Strip.ai_text= [Default] None <i># Alternative text to generate image</i></code></pre>
         </section>
     </main>
 </body>
