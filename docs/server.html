@@ -29,13 +29,13 @@ make run</code>
             <h2>Text to Speech</h2>
             <pre><code>curl -X POST http://localhost:8080?lang=en
   -H "Content-Type: application/json"
-  -d '{"type":"speech","text":"Content"}'</code>
+  -d '{"category":"speech","text":"Content"}'</code>
             </pre>
 
             <h2>Text to Image</h2>
             <pre><code>curl -X POST http://localhost:8080
   -H "Content-Type: application/json"
-  -d '{"type":"image","height":1920,"width":1080,"text":"Content"}'</code>
+  -d '{"category":"image","height":1920,"width":1080,"text":"Content"}'</code>
             </pre>
         </section>
     </main>

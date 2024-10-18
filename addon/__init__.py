@@ -16,21 +16,21 @@ def btt_get_strip_active():
         if strip.type == "TEXT":
             return strip
 
-def btt_from_text(types, strip):
+def btt_from_text(category, strip):
     sequences = bpy.context.scene.sequence_editor.sequences
-    name=f'{strip.name}-{types}'
-    if types == 'speech':
-        filepath=f'//{types}/{strip.name}.mp3'
-        if btt_post(types, strip, filepath) and not btt_exists(name):
+    name=f'{strip.name}-{category}'
+    if category == 'speech':
+        filepath=f'//{category}/{strip.name}.mp3'
+        if btt_post(category, strip, filepath) and not btt_exists(name):
             sound = sequences.new_sound(
                 name=name,
                 filepath=filepath,
                 channel=strip.channel + 1,
                 frame_start=int(strip.frame_start)
             )
-    elif types == 'image':
-        filepath=f'//{types}/{strip.name}.png'
-        if btt_post(types, strip, filepath) and not btt_exists(name):
+    elif category == 'image':
+        filepath=f'//{category}/{strip.name}.png'
+        if btt_post(category, strip, filepath) and not btt_exists(name):
             image = sequences.new_image(
                 name=name,
                 filepath=filepath,
@@ -39,7 +39,7 @@ def btt_from_text(types, strip):
             )
             image.frame_final_end = strip.frame_final_end
 
-def btt_post(types, strip, filepath):
+def btt_post(category, strip, filepath):
     abspath = bpy.path.abspath(filepath)
     if os.path.exists(abspath):
         return True
@@ -59,11 +59,11 @@ def btt_post(types, strip, filepath):
         ai_query = strip['ai_query']
     
     ai_text = strip.text.strip()
-    if types == 'image' and 'ai_text' in strip:
+    if category == 'image' and 'ai_text' in strip:
         ai_text = strip['ai_text']
         
     data = {
-        "type": types,
+        "category": category,
         "width": scene.render.resolution_x,
         "height": scene.render.resolution_y,
         "text": ai_text,

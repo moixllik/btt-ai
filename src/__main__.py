@@ -47,14 +47,14 @@ def receive_data():
     with tempfile.NamedTemporaryFile() as temp_file:
         mimetype = ""
         filepath = temp_file.name
-        if data["type"] == "speech":
+        if data["category"] == "speech":
             mimetype = "audio/mpeg"
             filepath += ".mp3"
             lang = request.args.get("lang", default="en")
             if not with_tts(filepath, data["text"], lang):
                 return "", 500
 
-        elif data["type"] == "image":
+        elif data["category"] == "image":
             mimetype = "image/png"
             filepath += ".png"
             if not with_torch(filepath, data["text"], data["height"], data["width"]):
