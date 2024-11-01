@@ -47,12 +47,12 @@ def btt_post(category, strip, filepath):
     scene = bpy.context.scene
     
     ai_url = "http://localhost:8080/"
-    if 'ai_url' in scene:
-        ai_url = scene['ai_url']
+    if '@ai_url' in scene:
+        ai_url = scene['@ai_url']
     
     ai_token = ""
-    if 'ai_token' in scene:
-        ai_token = scene['ai_token']
+    if '@ai_token' in scene:
+        ai_token = scene['@ai_token']
     
     ai_query = ""
     if 'ai_query' in strip:
