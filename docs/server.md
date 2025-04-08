@@ -1,9 +1,9 @@
-# BTT to AI
-
 [Home](/btt-ai/) |
 [Add-on](/btt-ai/addon) |
 [Server](/btt-ai/server) |
 [Support](https://github.com/moixllik/btt-ai/issues)
+
+---
 
 ## AI-Generative Server
 

@@ -1,9 +1,9 @@
-# BTT to AI
-
 [Home](/btt-ai/) |
 [Add-on](/btt-ai/addon) |
 [Server](/btt-ai/server) |
 [Support](https://github.com/moixllik/btt-ai/issues)
+
+---
 
 ![screenshot](./images/screenshot.png)
 
@@ -17,7 +17,7 @@
 
 ```conf 
 Scene['@ai_url'] = https://api.moixllik.com/btt/
-Scene['@ai_token'] = [Generate Token](https://store.moixllik.com/)
+Scene['@ai_token'] = [Generate Token]
 ```
 
 ![scene ai](./images/scene-ai.png)
